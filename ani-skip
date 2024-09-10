@@ -86,7 +86,7 @@ build_options() {
     ed_start=""
     options=""
 
-    for skip_type in "op" "ed"
+    for skip_type in "op" "ed" "recap"
     do
         sk_type_re='"skipType":"('$skip_type')"'
         unformatted=$(printf "%s" "$1" | grep -Eo "$st_time_re,$ed_time_re},$sk_type_re")
@@ -96,6 +96,7 @@ build_options() {
 
             [ "$skip_type" = "op" ] && op_end=$ed_time && ch_name="Opening"
             [ "$skip_type" = "ed" ] && ed_start=$st_time && ch_name="Ending"
+            [ "$skip_type" = "recap" ] && ed_start=$st_time && ch_name="Recap"
             [ -n "$options" ] && options="$options,"
 
             printf "$chapter_format" "$(ftoi $st_time)" "$(ftoi $ed_time)" "$ch_name" >> $chapters_file
