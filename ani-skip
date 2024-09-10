@@ -119,7 +119,7 @@ build_flags() {
     :param $1: MyAnimeList Identifier
     :param $2: Episode number
     '
-    aniskip_api="https://api.aniskip.com/v1/skip-times/$1/$2?types=op&types=ed"
+    aniskip_api="https://api.aniskip.com/v2/skip-times/$1/$2?types=op&types=ed&types=recap&episodeLength=0"
     metadata=$(curl -s --connect-timeout 5 -A "$agent" "$aniskip_api")
     
     found_status=$(printf "%s" "$metadata" | sed -n 's/.*"found":\([^,]*\).*/\1/p')
