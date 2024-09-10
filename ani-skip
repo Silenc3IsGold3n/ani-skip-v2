@@ -6,7 +6,7 @@ version_number="1.0.1"
 agent="Mozilla/5.0 (Windows NT 6.1; Win64; rv:109.0) Gecko/20100101 Firefox/109.0"
 
 chapter_format="\n[CHAPTER]\nTIMEBASE=1/1000\nSTART=%s\nEND=%s\nTITLE=%s\n"
-option_format="skip-%s_start=%s,skip-%s_end=%s" 
+option_format="skip-%s_start=%s,skip-%s_end=%s"
 
 die() {
     printf "\33[2K\r\033[1;31m%s\033[0m\n" "$*" >&2
@@ -33,7 +33,7 @@ help_info() {
       %s -q \"Solo Leveling\" # Returns MyAnimeList ID
       %s -q \"Solo Leveling\" -e 3 # Returns MPV skip flag
       %s -q 52299 -e 5 # Returns MPV skip flag
-    \n" "${0##*/}" "${0##*/}" "${0##*/}" "${0##*/}" 
+    \n" "${0##*/}" "${0##*/}" "${0##*/}" "${0##*/}"
     exit 0
 }
 
@@ -80,15 +80,15 @@ build_options() {
     `build_options` builds options for `--script-opts` flag
     :param $1: AniSkip metadata
     '
-    st_time_re='"start_time":([0-9.]+)'
-    ed_time_re='"end_time":([0-9.]+)'
+    st_time_re='"startTime":([0-9.]+)'
+    ed_time_re='"endTime":([0-9.]+)'
     op_end=""
     ed_start=""
     options=""
-    
+
     for skip_type in "op" "ed"
     do
-        sk_type_re='"skip_type":"('$skip_type')"'
+        sk_type_re='"skipType":"('$skip_type')"'
         unformatted=$(printf "%s" "$1" | grep -Eo "$st_time_re,$ed_time_re},$sk_type_re")
         if [ -n "$unformatted" ]; then
             st_time=$(printf "%s" "$unformatted" | grep -Eo "$st_time_re" | sed -E 's@'"$st_time_re"'@\1@')
@@ -121,7 +121,7 @@ build_flags() {
     '
     aniskip_api="https://api.aniskip.com/v2/skip-times/$1/$2?types=op&types=ed&types=recap&episodeLength=0"
     metadata=$(curl -s --connect-timeout 5 -A "$agent" "$aniskip_api")
-    
+
     found_status=$(printf "%s" "$metadata" | sed -n 's/.*"found":\([^,]*\).*/\1/p')
     [ "$found_status" != "true" ] && die "Skip times not found!"
 
