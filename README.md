@@ -95,7 +95,7 @@ ani-skip -h
 
 - Linux
   ```sh
-  git clone https://github.com/synacktraa/ani-skip.git
+  git clone https://github.com/Silenc3IsGold3n/ani-skip-v2.git
   sudo apt install mpv fzf  
   sudo cp ani-skip/ani-skip /usr/local/bin
   mkdir -p ~/.config/mpv/scripts && cp ani-skip/skip.lua ~/.config/mpv/scripts
@@ -109,7 +109,7 @@ ani-skip -h
     ```
   - Open git bash
     ```sh
-    git clone https://github.com/synacktraa/ani-skip.git
+    git clone https://github.com/Silenc3IsGold3n/ani-skip-v2.git
     cp ani-skip/ani-skip /usr/bin
     mkdir -p ~/scoop/apps/mpv/current/portable_config/scripts
     cp ani-skip/skip.lua ~/scoop/apps/mpv/current/portable_config/scripts
